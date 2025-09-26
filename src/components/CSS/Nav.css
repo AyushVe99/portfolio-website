@@ -1,7 +1,7 @@
 .link-item {
     position: relative;
     overflow: hidden;
-    color: #fff;
+    color: inherit;
     transition: color 0.5s ease;
 }
 
@@ -12,12 +12,12 @@
     left: 0;
     width: 0;
     height: 2px;
-    background-color: #007bff;
+    background-color: var(--accent);
     transition: width 0.3s ease;
 }
 
 .link-item:hover {
-    color: #007bff;
+    color: var(--accent);
     cursor: pointer;
     font-weight: bold;
 }
@@ -27,13 +27,19 @@
 }
 
 .bg-dark .nav-link {
-    color: #fff !important;
+    color: inherit !important;
 }
 
 .resume-button-container {
     text-align: center;
     display: flex;
     justify-content: center;
+}
+
+.theme-toggle-container {
+    display: flex;
+    align-items: center;
+    margin-left: 12px;
 }
 
 @media (max-width: 992px) {

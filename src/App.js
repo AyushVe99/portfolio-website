@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Element } from 'react-scroll';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
@@ -12,10 +12,22 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import './App.css';
 
 function App() {
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'theme-dark');
+
+  useEffect(() => {
+    document.documentElement.classList.remove('theme-dark', 'theme-light');
+    document.documentElement.classList.add(theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'theme-dark' ? 'theme-light' : 'theme-dark'));
+  };
+
   return (
     <div className="App">
     
-      <Navbar />
+      <Navbar theme={theme} onToggleTheme={toggleTheme} />
       <Element name="home" className="element">
         <div className="box-container">
           <Home />

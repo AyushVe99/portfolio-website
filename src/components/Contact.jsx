@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import emailjs from "emailjs-com";
 import { Container } from "react-bootstrap";
 
@@ -10,7 +10,7 @@ function Contact() {
   });
 
   const [sent, setSent] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,8 +20,14 @@ function Contact() {
     });
   };
 
+  const isEmailValid = useMemo(() => /[^\s@]+@[^\s@]+\.[^\s@]+/.test(formData.email), [formData.email]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!formData.name.trim()) { setError("Please enter your name."); return; }
+    if (!isEmailValid) { setError("Please enter a valid email."); return; }
+    if (!formData.message.trim() || formData.message.trim().length < 10) { setError("Message should be at least 10 characters."); return; }
+    setError("");
 
     emailjs
       .sendForm(
@@ -34,11 +40,11 @@ function Contact() {
         (result) => {
           console.log("Success:", result.text);
           setSent(true);
-          setError(false);
+          setError("");
         },
         (error) => {
           console.error("Error:", error.text);
-          setError(true);
+          setError("There was an error sending your message. Please try again.");
         }
       );
 
@@ -58,9 +64,7 @@ function Contact() {
           <div className="alert alert-success">Your message has been sent!</div>
         )}
         {error && (
-          <div className="alert alert-danger">
-            There was an error sending your message. Please try again.
-          </div>
+          <div className="alert alert-danger">{error}</div>
         )}
         <form onSubmit={handleSubmit} className="contact-form">
           <div className="form-group mb-3">
@@ -86,6 +90,9 @@ function Contact() {
               onChange={handleChange}
               required
             />
+            {!isEmailValid && formData.email && (
+              <small className="text-danger">Enter a valid email.</small>
+            )}
           </div>
           <div className="form-group mb-3">
             <label htmlFor="message" className="form-label">Message</label>
@@ -98,6 +105,9 @@ function Contact() {
               rows="5"
               required
             />
+            {formData.message && formData.message.trim().length < 10 && (
+              <small className="text-danger">At least 10 characters.</small>
+            )}
           </div>
           <button type="submit" className="btn btn-primary">Send</button>
         </form>

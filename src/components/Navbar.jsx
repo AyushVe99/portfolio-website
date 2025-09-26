@@ -1,14 +1,35 @@
-import React, { useState } from "react";
-import { Navbar, Container, Nav, Offcanvas, Button } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Navbar, Container, Nav, Offcanvas, Button, Form } from "react-bootstrap";
 import { Link } from "react-scroll";
 import resumePdf from "../assets/Resume_Ayush.pdf";
 import "./CSS/Nav.css";
 
-function NavigationBar() {
+function NavigationBar({ theme = 'theme-dark', onToggleTheme }) {
     const [show, setShow] = useState(false);
+    const [active, setActive] = useState('home');
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    useEffect(() => {
+        const handler = () => {
+            const sections = ['home', 'about', 'experience', 'projects', 'contact'];
+            let current = 'home';
+            sections.forEach((name) => {
+                const el = document.querySelector(`div[name="${name}"]`);
+                if (el) {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top <= 100 && rect.bottom >= 100) {
+                        current = name;
+                    }
+                }
+            });
+            setActive(current);
+        };
+        window.addEventListener('scroll', handler, { passive: true });
+        handler();
+        return () => window.removeEventListener('scroll', handler);
+    }, []);
 
     return (
         <>
@@ -37,7 +58,7 @@ function NavigationBar() {
                                     smooth={true}
                                     duration={300}
                                     onClick={handleClose}
-                                    className="link-item"
+                                    className={`link-item ${active === 'home' ? 'active' : ''}`}
                                 >
                                     Home
                                 </Nav.Link>
@@ -47,7 +68,7 @@ function NavigationBar() {
                                     smooth={true}
                                     duration={300}
                                     onClick={handleClose}
-                                    className="link-item"
+                                    className={`link-item ${active === 'about' ? 'active' : ''}`}
                                 >
                                     About
                                 </Nav.Link>
@@ -57,7 +78,7 @@ function NavigationBar() {
                                     smooth={true}
                                     duration={300}
                                     onClick={handleClose}
-                                    className="link-item"
+                                    className={`link-item ${active === 'experience' ? 'active' : ''}`}
                                 >
                                     Experience
                                 </Nav.Link>
@@ -67,7 +88,7 @@ function NavigationBar() {
                                     smooth={true}
                                     duration={300}
                                     onClick={handleClose}
-                                    className="link-item"
+                                    className={`link-item ${active === 'projects' ? 'active' : ''}`}
                                 >
                                     Projects
                                 </Nav.Link>
@@ -77,7 +98,7 @@ function NavigationBar() {
                                     smooth={true}
                                     duration={300}
                                     onClick={handleClose}
-                                    className="link-item"
+                                    className={`link-item ${active === 'contact' ? 'active' : ''}`}
                                 >
                                     Contact
                                 </Nav.Link>
@@ -86,6 +107,16 @@ function NavigationBar() {
                                 <Button variant="outline-light" href={resumePdf} download>
                                     Download Resume
                                 </Button>
+                            </div>
+                            <div className="theme-toggle-container">
+                                <Form.Check 
+                                  type="switch"
+                                  id="theme-switch"
+                                  label={theme === 'theme-dark' ? 'Dark' : 'Light'}
+                                  checked={theme === 'theme-dark'}
+                                  onChange={onToggleTheme}
+                                  className="text-white"
+                                />
                             </div>
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>

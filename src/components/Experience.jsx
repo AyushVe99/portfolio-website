@@ -11,8 +11,10 @@ function Experience() {
         <p className="date-location">Sept 2023 - Present | Noida, U.P</p>
         <ul>
           <li>Developed and maintained web applications using React and Node.js.</li>
-          <li>Collaborated on a team project to enhance a time entry application for improved scalability and user experience.</li>
-          <li>Implemented a feature for employees to log daily work hours in the time entry application, ensuring accurate time tracking for over 500 employees.</li>
+          <li>Improved TimeEntry performance using Lazy Loading and React.memo; reduced unnecessary re-renders and sped up initial load.</li>
+          <li>Built a Restructure Tool to convert Activity ⇄ WorkStream ⇄ Task, supporting bidirectional transformations and data integrity.</li>
+          <li>Created a tool to publish SPFx SharePoint sites as public websites; implemented backend services using Node.js and MongoDB.</li>
+          <li>Implemented a company-wide Leave Calendar where users can apply for leaves and view organization-wide schedules.</li>
           <li>Improved code quality through regular code reviews and testing procedures.</li>
         </ul>
       </div>
