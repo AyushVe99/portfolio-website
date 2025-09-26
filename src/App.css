@@ -132,10 +132,10 @@ a:hover { color: var(--accent-2); }
 .project-square-img {
   width: 100%;
   aspect-ratio: 1 / 1;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 /* Project carousel maintains square space */
 .project-carousel { width: 100%; }
 .project-carousel .carousel-inner { width: 100%; }
-.project-carousel-img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+.project-carousel-img { width: 100%; aspect-ratio: 1 / 1; object-fit: contain; }

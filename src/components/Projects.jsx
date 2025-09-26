@@ -6,6 +6,8 @@ import Travel1 from '../assets/Travel-1.png';
 import Travel2 from '../assets/Travel-2.png';
 import Travel3 from '../assets/Travel-3.png';
 import TimeEntry from '../assets/TimeEntry.png';
+import Food1 from '../assets/Food-1.png';
+import Food2 from '../assets/Food-2.png';
 const PROJECTS = [
   {
     title: 'FitConnect – Fitness Trainer Hiring Platform',
@@ -61,7 +63,7 @@ const PROJECTS = [
   {
     title: 'CraveVilla – Food Ordering Service',
     org: 'Personal Project',
-    img: 'https://www.boardinfinity.com/blog/content/images/2023/01/Mern.png',
+    images: [Food1, Food2],
     features: ['Browse menus', 'Add to cart & checkout', 'Order tracking', 'Responsive UI'],
     stack: ['React', 'Redux', 'Node.js', 'Express', 'MongoDB', 'Bootstrap'],
     description:
