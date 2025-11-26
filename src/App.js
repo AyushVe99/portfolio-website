@@ -1,58 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Element } from 'react-scroll';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import About from './components/About';
 import Projects from './components/Projects';
-//import Resume from './components/Resume';
 import Contact from './components/Contact';
-import Experience from './components/Experience'; 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Experience from './components/Experience';
+import ScrollToTop from './components/ScrollToTop';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './App.css';
 
 function App() {
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'theme-dark');
-
-  useEffect(() => {
-    document.documentElement.classList.remove('theme-dark', 'theme-light');
-    document.documentElement.classList.add(theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'theme-dark' ? 'theme-light' : 'theme-dark'));
-  };
-
   return (
-    <div className="App">
-    
-      <Navbar theme={theme} onToggleTheme={toggleTheme} />
-      <Element name="home" className="element">
-        <div className="box-container">
-          <Home />
-        </div>
+    <div className="App min-h-screen bg-deep-charcoal text-white font-sans selection:bg-electric-blue selection:text-white">
+      <Navbar />
+      <Element name="home">
+        <Home />
       </Element>
-      <Element name="about" className="element">
-        <div className="box-container">
-          <About />
-        </div>
+      <Element name="about">
+        <About />
       </Element>
-      <Element name="experience" className="element">
-        <div className="box-container">
-          <Experience />
-        </div>
+      <Element name="experience">
+        <Experience />
       </Element>
-      <Element name="projects" className="element">
-        <div className="box-container">
-          <Projects />
-        </div>
+      <Element name="projects">
+        <Projects />
       </Element>
-      <Element name="contact" className="element">
-        <div className="box-container">
-          <Contact />
-        </div>
+      <Element name="contact">
+        <Contact />
       </Element>
+      <ScrollToTop />
     </div>
   );
 }

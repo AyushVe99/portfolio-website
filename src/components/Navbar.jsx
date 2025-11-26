@@ -1,128 +1,101 @@
-import React, { useEffect, useState } from "react";
-import { Navbar, Container, Nav, Offcanvas, Button, Form } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-scroll";
 import resumePdf from "../assets/Resume_Ayush.pdf";
-import "./CSS/Nav.css";
 
-function NavigationBar({ theme = 'theme-dark', onToggleTheme }) {
-    const [show, setShow] = useState(false);
-    const [active, setActive] = useState('home');
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+function NavigationBar() {
+    const [scrolled, setScrolled] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        const handler = () => {
-            const sections = ['home', 'about', 'experience', 'projects', 'contact'];
-            let current = 'home';
-            sections.forEach((name) => {
-                const el = document.querySelector(`div[name="${name}"]`);
-                if (el) {
-                    const rect = el.getBoundingClientRect();
-                    if (rect.top <= 100 && rect.bottom >= 100) {
-                        current = name;
-                    }
-                }
-            });
-            setActive(current);
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setScrolled(true);
+            } else {
+                setScrolled(false);
+            }
         };
-        window.addEventListener('scroll', handler, { passive: true });
-        handler();
-        return () => window.removeEventListener('scroll', handler);
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const navLinks = [
+        { name: "Home", to: "home" },
+        { name: "About", to: "about" },
+        { name: "Experience", to: "experience" },
+        { name: "Projects", to: "projects" },
+        { name: "Contact", to: "contact" },
+    ];
+
     return (
-        <>
-            <Navbar bg="dark" variant="dark" expand="lg" className="mb-3">
-                <Container>
-                    <Navbar.Brand as={Link} to="home" smooth={true} duration={300}>
-                        Ayush Verma
-                    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="offcanvasNavbar" onClick={handleShow} />
-                    <Navbar.Offcanvas
-                        id="offcanvasNavbar"
-                        aria-labelledby="offcanvasNavbarLabel"
-                        placement="end"
-                        show={show}
-                        onHide={handleClose}
-                        className="bg-dark text-white"
+        <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-deep-charcoal/80 backdrop-blur-md border-b border-white/10 py-4" : "bg-transparent py-6"}`}>
+            <div className="container mx-auto px-6 flex justify-between items-center">
+                <Link to="home" smooth={true} duration={500} className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-electric-blue to-electric-purple cursor-pointer">
+                    Ayush Verma
+                </Link>
+
+                {/* Desktop Menu */}
+                <div className="hidden md:flex items-center gap-8">
+                    {navLinks.map((link) => (
+                        <Link
+                            key={link.name}
+                            to={link.to}
+                            smooth={true}
+                            duration={500}
+                            className="text-gray-300 hover:text-white transition-colors cursor-pointer text-sm font-medium"
+                        >
+                            {link.name}
+                        </Link>
+                    ))}
+                    <a
+                        href={resumePdf}
+                        download
+                        className="px-5 py-2 border border-electric-blue text-electric-blue rounded-full hover:bg-electric-blue hover:text-white transition-all text-sm font-medium"
                     >
-                        <Offcanvas.Header closeButton>
-                            <Offcanvas.Title id="offcanvasNavbarLabel" className="text-white">Menu</Offcanvas.Title>
-                        </Offcanvas.Header>
-                        <Offcanvas.Body>
-                            <Nav className="justify-content-end flex-grow-1 pe-3">
-                                <Nav.Link
-                                    as={Link}
-                                    to="home"
-                                    smooth={true}
-                                    duration={300}
-                                    onClick={handleClose}
-                                    className={`link-item ${active === 'home' ? 'active' : ''}`}
-                                >
-                                    Home
-                                </Nav.Link>
-                                <Nav.Link
-                                    as={Link}
-                                    to="about"
-                                    smooth={true}
-                                    duration={300}
-                                    onClick={handleClose}
-                                    className={`link-item ${active === 'about' ? 'active' : ''}`}
-                                >
-                                    About
-                                </Nav.Link>
-                                <Nav.Link
-                                    as={Link}
-                                    to="experience"
-                                    smooth={true}
-                                    duration={300}
-                                    onClick={handleClose}
-                                    className={`link-item ${active === 'experience' ? 'active' : ''}`}
-                                >
-                                    Experience
-                                </Nav.Link>
-                                <Nav.Link
-                                    as={Link}
-                                    to="projects"
-                                    smooth={true}
-                                    duration={300}
-                                    onClick={handleClose}
-                                    className={`link-item ${active === 'projects' ? 'active' : ''}`}
-                                >
-                                    Projects
-                                </Nav.Link>
-                                <Nav.Link
-                                    as={Link}
-                                    to="contact"
-                                    smooth={true}
-                                    duration={300}
-                                    onClick={handleClose}
-                                    className={`link-item ${active === 'contact' ? 'active' : ''}`}
-                                >
-                                    Contact
-                                </Nav.Link>
-                            </Nav>
-                            <div className="resume-button-container">
-                                <Button variant="outline-light" href={resumePdf} download>
-                                    Download Resume
-                                </Button>
-                            </div>
-                            <div className="theme-toggle-container">
-                                <Form.Check 
-                                  type="switch"
-                                  id="theme-switch"
-                                  label={theme === 'theme-dark' ? 'Dark' : 'Light'}
-                                  checked={theme === 'theme-dark'}
-                                  onChange={onToggleTheme}
-                                  className="text-white"
-                                />
-                            </div>
-                        </Offcanvas.Body>
-                    </Navbar.Offcanvas>
-                </Container>
-            </Navbar>
-        </>
+                        Resume
+                    </a>
+                </div>
+
+                {/* Mobile Menu Button */}
+                <button
+                    className="md:hidden text-white focus:outline-none"
+                    onClick={() => setIsOpen(!isOpen)}
+                >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {isOpen ? (
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        ) : (
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                        )}
+                    </svg>
+                </button>
+
+                {/* Mobile Menu Overlay */}
+                {isOpen && (
+                    <div className="absolute top-full left-0 w-full bg-deep-charcoal border-b border-white/10 p-6 md:hidden flex flex-col gap-4 shadow-2xl">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                to={link.to}
+                                smooth={true}
+                                duration={500}
+                                onClick={() => setIsOpen(false)}
+                                className="text-gray-300 hover:text-white transition-colors cursor-pointer block"
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
+                        <a
+                            href={resumePdf}
+                            download
+                            className="inline-block text-center px-5 py-2 border border-electric-blue text-electric-blue rounded-full hover:bg-electric-blue hover:text-white transition-all"
+                        >
+                            Resume
+                        </a>
+                    </div>
+                )}
+            </div>
+        </nav>
     );
 }
 

@@ -1,6 +1,5 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import emailjs from "emailjs-com";
-import { Container } from "react-bootstrap";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -14,105 +13,100 @@ function Contact() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({ ...formData, [name]: value });
   };
-
-  const isEmailValid = useMemo(() => /[^\s@]+@[^\s@]+\.[^\s@]+/.test(formData.email), [formData.email]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name.trim()) { setError("Please enter your name."); return; }
-    if (!isEmailValid) { setError("Please enter a valid email."); return; }
-    if (!formData.message.trim() || formData.message.trim().length < 10) { setError("Message should be at least 10 characters."); return; }
-    setError("");
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setError("Please fill in all fields.");
+      return;
+    }
 
-    emailjs
-      .sendForm(
-        "service_5b7vxdp",
-        "template_4p2s1fr",
-        e.target,
-        "ivKdLZ3t786sMqr-0"
-      )
-      .then(
-        (result) => {
-          console.log("Success:", result.text);
-          setSent(true);
-          setError("");
-        },
-        (error) => {
-          console.error("Error:", error.text);
-          setError("There was an error sending your message. Please try again.");
-        }
-      );
-
-    // Reset form after submission
-    setFormData({
-      name: "",
-      email: "",
-      message: "",
-    });
+    emailjs.sendForm(
+      "service_5b7vxdp",
+      "template_4p2s1fr",
+      e.target,
+      "ivKdLZ3t786sMqr-0"
+    ).then(
+      () => {
+        setSent(true);
+        setError("");
+        setFormData({ name: "", email: "", message: "" });
+      },
+      () => {
+        setError("Failed to send message. Please try again.");
+      }
+    );
   };
 
   return (
-    <section id="contact" className="contact-section py-5">
-      <Container className="contact-container">
-        <h2 className="text-center mb-4">Contact Me</h2>
-        {sent && (
-          <div className="alert alert-success">Your message has been sent!</div>
-        )}
-        {error && (
-          <div className="alert alert-danger">{error}</div>
-        )}
-        <form onSubmit={handleSubmit} className="contact-form">
-          <div className="form-group mb-3">
-            <label htmlFor="name" className="form-label">Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className="form-control"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group mb-3">
-            <label htmlFor="email" className="form-label">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="form-control"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-            {!isEmailValid && formData.email && (
-              <small className="text-danger">Enter a valid email.</small>
-            )}
-          </div>
-          <div className="form-group mb-3">
-            <label htmlFor="message" className="form-label">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              className="form-control"
-              value={formData.message}
-              onChange={handleChange}
-              rows="5"
-              required
-            />
-            {formData.message && formData.message.trim().length < 10 && (
-              <small className="text-danger">At least 10 characters.</small>
-            )}
-          </div>
-          <button type="submit" className="btn btn-primary">Send</button>
-        </form>
-      </Container>
-    </section>
+    <div className="py-20 bg-[#0f0f0f]">
+      <div className="container mx-auto px-6 max-w-4xl">
+        <h2 className="text-4xl font-bold mb-12 text-center">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-blue to-electric-purple">
+            Get In Touch
+          </span>
+        </h2>
+
+        <div className="bg-[#1e1e1e] p-8 rounded-2xl border border-white/10 shadow-2xl">
+          {sent && (
+            <div className="mb-6 p-4 bg-green-500/20 border border-green-500 text-green-500 rounded-lg">
+              Message sent successfully!
+            </div>
+          )}
+          {error && (
+            <div className="mb-6 p-4 bg-red-500/20 border border-red-500 text-red-500 rounded-lg">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-gray-400 mb-2 text-sm">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full bg-[#252526] border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-electric-blue transition-colors"
+                  placeholder="John Doe"
+                />
+              </div>
+              <div>
+                <label className="block text-gray-400 mb-2 text-sm">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full bg-[#252526] border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-electric-blue transition-colors"
+                  placeholder="john@example.com"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block text-gray-400 mb-2 text-sm">Message</label>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                rows="5"
+                className="w-full bg-[#252526] border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-electric-blue transition-colors"
+                placeholder="Your message..."
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-electric-blue to-electric-purple text-white font-bold py-4 rounded-lg hover:opacity-90 transition-opacity"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }
 

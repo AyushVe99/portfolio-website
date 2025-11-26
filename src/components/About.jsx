@@ -1,83 +1,73 @@
-import React, { useState, useEffect } from 'react';
-import { useSpring, animated } from 'react-spring';
-import { useInView } from 'react-intersection-observer';
-import './CSS/About.css';
+import React from 'react';
+import { FaReact, FaNodeJs, FaCode, FaGraduationCap } from 'react-icons/fa';
+import { SiTypescript, SiNextdotjs, SiRedux, SiTailwindcss, SiMongodb, SiMicrosoftazure, SiAmazonaws } from 'react-icons/si';
 
-const AnimatedSkill = ({ skill, delay, direction, onSkillInView }) => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,  // Trigger the animation only once
-    threshold: 0.1      // Trigger when 10% of the section is in view
-  });
-
-  const springs = useSpring({
-    opacity: inView ? 1 : 0,
-    transform: inView ? 'translate3d(0, 0, 0)' : `translate3d(${direction === 'left' ? '-150px' : '150px'}, 0, 0)`,
-    delay: delay,
-    config: { tension: 220, friction: 120 },
-    onRest: () => {
-      if (inView) {
-        onSkillInView(); // Notify parent component that this skill has finished animating
-      }
-    }
-  });
-
-  return (
-    <animated.button ref={ref} style={springs} className="skill-button m-1">
-      {skill}
-    </animated.button>
-  );
-};
-
-const SkillSection = ({ type, items, direction }) => {
-  const [inViewIndex, setInViewIndex] = useState(0);
-
-  useEffect(() => {
-    if (inViewIndex < items.length) {
-      const timer = setTimeout(() => {
-        setInViewIndex(inViewIndex + 1);
-      }, 400); 
-      return () => clearTimeout(timer);
-    }
-  }, [inViewIndex, items.length]);
-
-  return (
-    <div className="mb-3">
-      <h3>{type}</h3>
-      <div className="d-flex flex-wrap">
-        {items.map((skill, i) => (
-          <AnimatedSkill
-            key={i}
-            skill={skill}
-            delay={i * 400}
-            direction={direction}
-            onSkillInView={() => setInViewIndex(i + 1)}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
+const SKILLS = [
+  { name: 'React.js', icon: <FaReact size={24} />, color: 'text-blue-400' },
+  { name: 'Next.js', icon: <SiNextdotjs size={24} />, color: 'text-white' },
+  { name: 'TypeScript', icon: <SiTypescript size={24} />, color: 'text-blue-600' },
+  { name: 'Node.js', icon: <FaNodeJs size={24} />, color: 'text-green-500' },
+  { name: 'Redux', icon: <SiRedux size={24} />, color: 'text-purple-500' },
+  { name: 'Tailwind CSS', icon: <SiTailwindcss size={24} />, color: 'text-cyan-400' },
+  { name: 'MongoDB', icon: <SiMongodb size={24} />, color: 'text-green-400' },
+  { name: 'Azure', icon: <SiMicrosoftazure size={24} />, color: 'text-blue-500' },
+  { name: 'AWS', icon: <SiAmazonaws size={24} />, color: 'text-orange-500' },
+  { name: 'SPFx', icon: <FaCode size={24} />, color: 'text-yellow-400' },
+];
 
 function About() {
-  const skills = [
-    { type: 'Technical Skills:', items: ['React', 'JavaScript', 'Node.js', 'MySQL', 'Tailwind CSS', 'Java', 'Git'], direction: 'right' },
-    { type: 'Soft Skills:', items: ['Dedication', 'Critical Thinking', 'Time Management'], direction: 'left' },
-  ];
-
   return (
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col-md-12">
-          <h3>Education</h3>
-          <ul>
-            <li>Master of Computer Application, AKTU University (2021-2023)</li>
-            <li>Bachelor of Computer Science, Babu Banarasi Das University (2017-2020)</li>
-          </ul>
-          
-          {/* Skill Sections */}
-          {skills.map((skillSet, index) => (
-            <SkillSection key={index} type={skillSet.type} items={skillSet.items} direction={skillSet.direction} />
-          ))}
+    <div className="py-20 bg-[#0f0f0f]">
+      <div className="container mx-auto px-6">
+        <h2 className="text-4xl font-bold mb-12 text-center">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-blue to-electric-purple">
+            About Me
+          </span>
+        </h2>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {/* Technical Arsenal - Bento Grid Large Item */}
+          <div className="md:col-span-2 bg-[#1e1e1e] p-8 rounded-2xl border border-white/10 hover:border-electric-blue/50 transition-colors shadow-lg">
+            <div className="flex items-center gap-3 mb-6">
+              <FaCode className="text-electric-blue text-2xl" />
+              <h3 className="text-2xl font-bold text-white">Technical Arsenal</h3>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+              {SKILLS.map((skill) => (
+                <div key={skill.name} className="flex flex-col items-center justify-center p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors group">
+                  <span className={`mb-2 ${skill.color} group-hover:scale-110 transition-transform duration-300`}>
+                    {skill.icon}
+                  </span>
+                  <span className="text-sm text-gray-300 font-medium">{skill.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Education & Soft Skills - Stacked */}
+          <div className="space-y-8">
+            {/* Education */}
+            <div className="bg-[#1e1e1e] p-8 rounded-2xl border border-white/10 hover:border-electric-purple/50 transition-colors shadow-lg h-full">
+              <div className="flex items-center gap-3 mb-6">
+                <FaGraduationCap className="text-electric-purple text-2xl" />
+                <h3 className="text-2xl font-bold text-white">Education</h3>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-lg font-bold text-white">MCA</h4>
+                  <p className="text-electric-blue">IPEM Group of Institutions</p>
+                  <p className="text-sm text-gray-400">2021 - 2023 | CGPA: 7.6/10</p>
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-white">Achievements</h4>
+                  <ul className="text-sm text-gray-400 list-disc list-inside space-y-1 mt-2">
+                    <li>Top 5% globally in Newton School contests (Rank: #3956)</li>
+                    <li>Solved 150+ problems on LeetCode (Top 15% globally)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
