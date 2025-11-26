@@ -22,7 +22,7 @@ const PROJECTS = [
     img: TimeEntry,
     stack: ['React', 'TypeScript', 'SPFx'],
     description: 'SharePoint Framework web part enabling employees to manage time entries with filters and summaries.',
-    href: 'https://hhhhteams.sharepoint.com/sites/HHHH/SP/SitePages/UserTimeEntry.aspx',
+    href: null,
     tags: ['sharepoint', 'enterprise']
   },
   {

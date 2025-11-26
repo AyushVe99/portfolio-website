@@ -10,7 +10,7 @@ const codeString = `const developer = {
   skills: [
     "Next.js", "React",
     "Node.js", "TypeScript",
-    "AWS", "Azure"
+    "AWS", "MongoDB"
   ],
   passion: "Building Scalable Solutions"
 };`;
