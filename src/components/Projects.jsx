@@ -32,7 +32,7 @@ const PROJECTS = [
     stack: ['React', 'TypeScript', 'SPFx', 'SharePoint'],
     description: 'Enterprise task tracking and workflow management tool with real-time status updates, Gantt chart visualization, and team collaboration features for operational efficiency.',
     href: null,
-    tags: ['sharepoint', 'enterprise']
+    tags: ['sharepoint', 'enterprise', 'fullstack']
   },
   {
     title: 'Trouvile',
