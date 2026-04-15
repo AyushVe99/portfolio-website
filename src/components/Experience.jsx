@@ -3,9 +3,28 @@ import { FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
 
 const EXPERIENCES = [
   {
+    role: 'Associate Software Engineer',
+    company: 'Manufac',
+    duration: 'Jan 2026 – Present',
+    description: [
+      'Built and scaled a real-time SaaS platform for employee engagement used by 5,000+ users, combining KPI tracking, comprehensive survey management, meetings, and feedback into a single system.',
+      'Architected a robust Survey Manager enabling admins to create and automatically dispatch targeted lifecycle surveys (e.g., training, joining, 30/60-day) using CRON jobs.',
+      'Developed dynamic survey components supporting various formats (MCQ, Likert, Yes/No, Open-ended) and implemented AI to synthesize survey responses into personalized, automated action plans.',
+      'Built interactive data visualization charts to track respondent demographics (gender, department, ethnicity) alongside a custom margin of error calculator.',
+      'Improved frontend performance by optimizing rendering and state management, reducing UI latency by ~40%.',
+      'Designed low-latency backend systems with PostgreSQL and real-time data handling, cutting sync delays by ~30%.',
+      'Enhanced system reliability under high traffic using caching and rate-limiting, reducing API failures by ~35%.',
+      'Developed event-driven pipelines using AWS Lambda to process thousands of analytics events daily.',
+      'Led cross-module refactoring across frontend and backend, aligning APIs and data models without downtime.',
+      'Conducted regular code reviews (PR reviews), ensuring code quality, consistency, and adherence to best practices across the team.',
+      'Improved debugging and monitoring by introducing structured logging and observability practices.'
+    ],
+    tech: ['Next.js', 'Supabase', 'PostgreSQL', 'AWS Lambda', 'React']
+  },
+  {
     role: 'Software Developer',
     company: 'Smalsus Infolab Pvt. Ltd.',
-    duration: 'Oct 2023 – Present',
+    duration: 'Oct 2023 – Jan 2026',
     description: [
       'Designed and deployed RESTful APIs with Express.js to integrate SPFx tools, improving reporting performance by 30%.',
       'Built a SharePoint–MongoDB Sync Tool handling 10,000+ records using Node.js and Mongoose.',

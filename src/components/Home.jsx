@@ -32,7 +32,7 @@ function Home() {
             </span>
           </h1>
           <p className="text-xl text-gray-400 max-w-lg">
-            Results-driven Full Stack Developer with 2 years of experience in designing, developing, and deploying MERN stack applications.
+            Results-driven Full Stack Developer with around 3 years of experience designing, developing, and deploying scalable applications using the MERN stack, Next.js, and PostgreSQL.
           </p>
 
           <div className="flex gap-4 pt-4">
