@@ -1,85 +1,6 @@
 import React from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
-import fitConnect from '../assets/fitConnect.png';
-import Travel1 from '../assets/Travel-1.png';
-import TimeEntry from '../assets/TimeEntry.png';
-import Food1 from '../assets/Food-1.png';
-import OperationalTool from '../assets/OMT.png';
-
-const PROJECTS = [
-  {
-    title: 'Medoly',
-    subtitle: 'Medical Claims SaaS Platform',
-    img: 'https://placehold.co/600x400/1e1e1e/white?text=Medoly',
-    stack: ['React 19', 'TypeScript', 'Mantine UI', 'TanStack Query', 'AWS Amplify'],
-    description: 'Architected a scalable, type-safe frontend. Engineered an advanced RBAC system for global auditor roles. Optimized data fetching for real-time claims review dashboard using TanStack Query and Zod.',
-    href: null,
-    tags: ['saas', 'healthcare', 'frontend']
-  },
-  {
-    title: 'Culture Booster',
-    subtitle: 'Employee Engagement Portal',
-    img: 'https://placehold.co/600x400/1e1e1e/white?text=Culture+Booster',
-    stack: ['Next.js', 'Supabase', 'Docker', 'GitHub Actions'],
-    description: 'Enabled zero-downtime production releases via Docker and automated CI/CD. Built backend cron jobs to dynamically trigger employee lifecycle surveys. Built an interactive analytics dashboard with KPI visualizations.',
-    href: null,
-    tags: ['fullstack', 'analytics']
-  },
-  {
-    title: 'Internal Timesheet Management System',
-    subtitle: 'Timesheet & Project Management',
-    img: 'https://placehold.co/600x400/1e1e1e/white?text=Timesheet+Dashboard',
-    stack: ['React.js', 'TypeScript', 'Firebase'],
-    description: 'Engineered end-to-end Timesheet and Project management modules. Secured database operations with custom Firebase Security Rules for RBAC. Centralized project tracking into a single unified dashboard.',
-    href: null,
-    tags: ['internal-tool', 'management']
-  },
-  {
-    title: 'FitConnect',
-    subtitle: 'Fitness Trainer Hiring Platform (Next.js + MERN)',
-    img: fitConnect,
-    stack: ['Next.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Redux Toolkit', 'Bootstrap'],
-    description: 'Full-stack fitness trainer hiring platform with Next.js App Router, secure authentication, role-based access control (Admin/User/Trainer), and dedicated Admin Dashboard for trainer onboarding approval.',
-    href: 'https://github.com/Ayush30012000/trainers-deadpr',
-    tags: ['fullstack', 'mern']
-  },
-  {
-    title: 'TimeSheet Management (SPFx)',
-    subtitle: 'SPFx SharePoint App',
-    img: TimeEntry,
-    stack: ['React', 'TypeScript', 'SPFx'],
-    description: 'SharePoint Framework web part enabling employees to manage time entries with filters and summaries.',
-    href: null,
-    tags: ['sharepoint', 'enterprise']
-  },
-  {
-    title: 'Operational Management Tool (SPFx)',
-    subtitle: 'Task & Workflow Management System',
-    img: OperationalTool,
-    stack: ['React', 'TypeScript', 'SPFx', 'SharePoint'],
-    description: 'Enterprise task tracking and workflow management tool with real-time status updates, Gantt chart visualization, and team collaboration features for operational efficiency.',
-    href: null,
-    tags: ['sharepoint', 'enterprise', 'fullstack']
-  },
-  {
-    title: 'Trouvile',
-    subtitle: 'Travel Packages Website',
-    img: Travel1,
-    stack: ['React', 'TypeScript', 'Bootstrap'],
-    description: 'Frontend for a travel website offering curated itineraries and packages across India.',
-    href: 'https://trivillio.vercel.app/',
-    tags: ['frontend', 'travel']
-  },
-  {
-    title: 'CraveVilla',
-    subtitle: 'Food Ordering Service',
-    img: Food1,
-    stack: ['React', 'Redux', 'Node.js', 'MongoDB'],
-    description: 'A full-stack food ordering web app enabling users to explore restaurants and build carts.',
-    href: 'https://food-ordering-app-psi-five.vercel.app/',
-    tags: ['fullstack', 'ecommerce']
-  }
-];
+import { PROJECTS } from '../data/constants';
 
 function Projects() {
   return (
@@ -115,7 +36,7 @@ function Projects() {
 
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.stack.map(tech => (
-                      <span key={tech} className="px-2 py-1 bg-white/10 rounded text-xs text-white backdrop-blur-sm">
+                      <span key={tech} className="px-2 py-1 bg-electric-blue/10 border border-electric-blue/30 rounded text-xs text-electric-blue font-medium backdrop-blur-sm">
                         {tech}
                       </span>
                     ))}

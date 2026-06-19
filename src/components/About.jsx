@@ -1,20 +1,6 @@
 import React from 'react';
-import { FaReact, FaNodeJs, FaCode, FaGraduationCap } from 'react-icons/fa';
-import { SiTypescript, SiNextdotjs, SiRedux, SiTailwindcss, SiMongodb, SiPostgresql, SiExpress, SiDocker, SiFirebase, SiAmazonaws } from 'react-icons/si';
-
-const SKILLS = [
-  { name: 'React.js', icon: <FaReact size={24} />, color: 'text-blue-400' },
-  { name: 'Next.js', icon: <SiNextdotjs size={24} />, color: 'text-white' },
-  { name: 'TypeScript', icon: <SiTypescript size={24} />, color: 'text-blue-600' },
-  { name: 'Node.js', icon: <FaNodeJs size={24} />, color: 'text-green-500' },
-  { name: 'Express.js', icon: <SiExpress size={24} />, color: 'text-gray-300' },
-  { name: 'Tailwind CSS', icon: <SiTailwindcss size={24} />, color: 'text-cyan-400' },
-  { name: 'MongoDB', icon: <SiMongodb size={24} />, color: 'text-green-400' },
-  { name: 'PostgreSQL', icon: <SiPostgresql size={24} />, color: 'text-blue-500' },
-  { name: 'Docker', icon: <SiDocker size={24} />, color: 'text-blue-400' },
-  { name: 'AWS', icon: <SiAmazonaws size={24} />, color: 'text-orange-500' },
-  { name: 'Firebase', icon: <SiFirebase size={24} />, color: 'text-yellow-400' },
-];
+import { FaCode, FaGraduationCap } from 'react-icons/fa';
+import { SKILLS } from '../data/constants';
 
 function About() {
   return (
