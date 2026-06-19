@@ -6,13 +6,13 @@ import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const codeString = `const developer = {
   name: "Ayush Verma",
-  role: "Full Stack Developer",
+  role: "Full Stack (MERN) Developer",
   skills: [
-    "Next.js", "React",
+    "Next.js", "React.js",
     "Node.js", "TypeScript",
-    "AWS", "MongoDB"
+    "PostgreSQL", "AWS"
   ],
-  passion: "Building Scalable Solutions"
+  passion: "System Design & Scalability"
 };`;
 
 function Home() {
@@ -32,7 +32,7 @@ function Home() {
             </span>
           </h1>
           <p className="text-xl text-gray-400 max-w-lg">
-            Results-driven Full Stack Developer with around 3 years of experience designing, developing, and deploying scalable applications using the MERN stack, Next.js, and PostgreSQL.
+            Results-driven Full Stack (MERN) Developer with nearly 3 years of experience building scalable SaaS platforms and real-time systems using Node.js, React.js, and PostgreSQL.
           </p>
 
           <div className="flex gap-4 pt-4">

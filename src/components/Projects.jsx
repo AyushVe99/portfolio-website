@@ -8,6 +8,33 @@ import OperationalTool from '../assets/OMT.png';
 
 const PROJECTS = [
   {
+    title: 'Medoly',
+    subtitle: 'Medical Claims SaaS Platform',
+    img: 'https://placehold.co/600x400/1e1e1e/white?text=Medoly',
+    stack: ['React 19', 'TypeScript', 'Mantine UI', 'TanStack Query', 'AWS Amplify'],
+    description: 'Architected a scalable, type-safe frontend. Engineered an advanced RBAC system for global auditor roles. Optimized data fetching for real-time claims review dashboard using TanStack Query and Zod.',
+    href: null,
+    tags: ['saas', 'healthcare', 'frontend']
+  },
+  {
+    title: 'Culture Booster',
+    subtitle: 'Employee Engagement Portal',
+    img: 'https://placehold.co/600x400/1e1e1e/white?text=Culture+Booster',
+    stack: ['Next.js', 'Supabase', 'Docker', 'GitHub Actions'],
+    description: 'Enabled zero-downtime production releases via Docker and automated CI/CD. Built backend cron jobs to dynamically trigger employee lifecycle surveys. Built an interactive analytics dashboard with KPI visualizations.',
+    href: null,
+    tags: ['fullstack', 'analytics']
+  },
+  {
+    title: 'Internal Timesheet Management System',
+    subtitle: 'Timesheet & Project Management',
+    img: 'https://placehold.co/600x400/1e1e1e/white?text=Timesheet+Dashboard',
+    stack: ['React.js', 'TypeScript', 'Firebase'],
+    description: 'Engineered end-to-end Timesheet and Project management modules. Secured database operations with custom Firebase Security Rules for RBAC. Centralized project tracking into a single unified dashboard.',
+    href: null,
+    tags: ['internal-tool', 'management']
+  },
+  {
     title: 'FitConnect',
     subtitle: 'Fitness Trainer Hiring Platform (Next.js + MERN)',
     img: fitConnect,
@@ -17,7 +44,7 @@ const PROJECTS = [
     tags: ['fullstack', 'mern']
   },
   {
-    title: 'TimeSheet Management',
+    title: 'TimeSheet Management (SPFx)',
     subtitle: 'SPFx SharePoint App',
     img: TimeEntry,
     stack: ['React', 'TypeScript', 'SPFx'],
@@ -26,7 +53,7 @@ const PROJECTS = [
     tags: ['sharepoint', 'enterprise']
   },
   {
-    title: 'Operational Management Tool',
+    title: 'Operational Management Tool (SPFx)',
     subtitle: 'Task & Workflow Management System',
     img: OperationalTool,
     stack: ['React', 'TypeScript', 'SPFx', 'SharePoint'],
