@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaReact, FaNodeJs, FaCode } from 'react-icons/fa';
+import { FaReact, FaNodeJs } from 'react-icons/fa';
 import { SiTypescript, SiNextdotjs, SiTailwindcss, SiMongodb, SiPostgresql, SiExpress, SiDocker, SiFirebase, SiAmazonaws } from 'react-icons/si';
 
 import fitConnect from '../assets/fitConnect.png';
